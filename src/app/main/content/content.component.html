@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" (click)="bugsSorted()">Title</th>
+      <th scope="col" (click)="bugsSorted">Priority</th>
+      <th scope="col" (click)="bugsSorted">Reporter</th>
+      <th scope="col" (click)="bugsSorted">Date Created</th>
+      <th scope="col" (click)="bugsSorted">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let bug of bugs">
+      <td>{{bug.title}}</td>
+      <td>{{bug.priority}}</td>
+      <td>{{bug.reporter}}</td>
+      <td>{{bug.createdAt}}</td>
+      <td>{{bug.status}}</td>
+    </tr>
+  </tbody>
+</table>
