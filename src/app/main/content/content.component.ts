@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Bugs } from '../bugs';
+import { ContentService } from '../content.service';
 
 @Component({
   selector: 'app-content',
@@ -8,17 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private service:ContentService) { }
 
-  bugs:any;
-  ngOnInit(): void {
-    this.http.get('https://bug-report-system-server.herokuapp.com/bugs').subscribe(data => {
+  bugs:Bugs
+  ngOnInit(){
+    this.service.getBugs().subscribe(data => {
       this.bugs = data
     })
   }
-
-  bugsSorted() {
-    this.http.get('bugs?sort=title,desc&page=0&size=10&title=bug&priority=1&reporter=QA&status=Done')
-  }
-
 }

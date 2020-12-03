@@ -1,13 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Bugs } from './bugs';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContentService {
+export class ContentService implements OnInit{
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+
+  ngOnInit(): void {
+  }
+
+  getBugs(): Observable<Bugs>{
+    return this.http.get<Bugs>('https://bug-report-system-server.herokuapp.com/bugs')
+  }
+
+  sortedBugs(): Observable<Bugs> {
+    return this.http.get<Bugs>('https://bug-report-system-server.herokuapp.com/bugs?sort=status,desc')
+  }
 
 }
