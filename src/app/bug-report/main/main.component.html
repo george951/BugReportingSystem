@@ -1,0 +1,34 @@
+<style>
+    .btn-css{
+        border: none;
+        font-weight: bold;
+        background-color: #343a40;
+        color: white;
+    }
+</style>
+
+<div class="bs-example">
+    <div class="container">
+        <br>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th><button class="btn-css" (click)="SortedBugs(table[0])">Title</button></th>
+                    <th><button class="btn-css" (click)="SortedBugs(table[1])">Priority</button></th>
+                    <th><button class="btn-css" (click)="SortedBugs(table[2])">Reporter</button></th>
+                    <th><button class="btn-css" (click)="SortedBugs(table[3])">Date created</button></th>
+                    <th><button class="btn-css" (click)="SortedBugs(table[4])">Status</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bug of bugs;">
+                    <td>{{bug.title}}</td>
+                    <td>{{bug.priority}}</td>
+                    <td>{{bug.reporter}}</td>
+                    <td>{{bug.createdAt}}</td>
+                    <td>{{bug.status}}</td>
+                </tr>           
+            </tbody>
+        </table>
+    </div>
+</div>
