@@ -18,8 +18,8 @@ export class ContentService implements OnInit{
     return this.http.get<Bugs>('https://bug-report-system-server.herokuapp.com/bugs')
   }
 
-  sortedBugs(): Observable<Bugs> {
-    return this.http.get<Bugs>('https://bug-report-system-server.herokuapp.com/bugs?sort=status,desc')
+  sortedBugs(params:string, sort:string): Observable<Bugs> {
+    return this.http.get<Bugs>(`https://bug-report-system-server.herokuapp.com/bugs?sort=${params},${sort}`)
   }
 
 }
