@@ -1,20 +1,39 @@
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col" (click)="getSorted(headers[0], sort[0])">Title</th>
-      <th scope="col" (click)="getSorted(headers[1], sort[0])">Priority</th>
-      <th scope="col" (click)="getSorted(headers[2], sort[0])">Reporter</th>
-      <th scope="col" (click)="getSorted(headers[3], sort[0])">Date Created</th>
-      <th scope="col" (click)="getSorted(headers[4], sort[0])">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let bug of bugs">
-      <td>{{bug.title}}</td>
-      <td>{{bug.priority}}</td>
-      <td>{{bug.reporter}}</td>
-      <td>{{bug.createdAt}}</td>
-      <td>{{bug.status}}</td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <button type="button" class="btn btn-primary" [routerLink]="['/bugform']">
+    Create New
+  </button>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" (click)="sortedBugs(params[0], sorting[0])">Title</th>
+          <th scope="col" (click)="sortedBugs(params[1], sorting[0])">
+            Priority
+          </th>
+          <th scope="col" (click)="sortedBugs(params[2], sorting[0])">
+            Reporter
+          </th>
+          <th scope="col" (click)="sortedBugs(params[3], sorting[0])">
+            Date Created
+          </th>
+          <th scope="col" (click)="sortedBugs(params[4], sorting[0])">
+            Status
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bug of bugs">
+          <td>{{ bug.title }}</td>
+          <td>{{ bug.priority }}</td>
+          <td>{{ bug.reporter }}</td>
+          <td>{{ bug.createdAt }}</td>
+          <td>{{ bug.status }}</td>
+          <td>
+            <button class="btn btn-primary" [routerLink]="['/putBugs']">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
