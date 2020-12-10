@@ -22,13 +22,13 @@ export interface Bugform {
 
 export class BugformComponent implements OnInit {
 
-  form: FormGroup
+  postForm: FormGroup
   bugUrl = "https://bug-report-system-server.herokuapp.com/bugs"
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router:Router) { }
 
   ngOnInit(): void {
-    this.form = this.fb.group({
+    this.postForm = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
       priority: [null, Validators.required],
@@ -36,8 +36,8 @@ export class BugformComponent implements OnInit {
       status: [null, Validators.required],
     })
 
-    this.form.get('reporter').valueChanges.subscribe(value => {
-      const statusControl = this.form.get('status')
+    this.postForm.get('reporter').valueChanges.subscribe(value => {
+      const statusControl = this.postForm.get('status')
 
       if (value === 'QA') {
         statusControl.setValidators(Validators.required)
@@ -49,19 +49,19 @@ export class BugformComponent implements OnInit {
   }
 
   get title():any {
-    return this.form.get('title')
+    return this.postForm.get('title')
   }
   get description():any {
-    return this.form.get('description')
+    return this.postForm.get('description')
   }
   get priority():any {
-    return this.form.get('priority')
+    return this.postForm.get('priority')
   }
   get reporter():any {
-    return this.form.get('reporter')
+    return this.postForm.get('reporter')
   }
   get status():any {
-    return this.form.get('status')
+    return this.postForm.get('status')
   }
 
   onSubmit() {

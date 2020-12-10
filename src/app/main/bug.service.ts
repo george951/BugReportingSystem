@@ -15,6 +15,7 @@ export interface Bugform {
 })
 export class BugService implements OnInit{
 
+
   constructor(private http:HttpClient) { }
 
   ngOnInit(){
@@ -24,11 +25,13 @@ export class BugService implements OnInit{
     return this.http.get('https://bug-report-system-server.herokuapp.com/bugs')
   }
 
+
   getSortingBugs(params:string, sorting:string):Observable<any>{
     return this.http.get(`https://bug-report-system-server.herokuapp.com/bugs?sort=${params},${sorting}`)
   }
 
-  putBugs(id:string, body:Bugform):Observable<any> {
+  putBugs(id:string,body:Bugform):Observable<any> {
     return this.http.put(`https://bug-report-system-server.herokuapp.com/bugs/${id}`,body)
   }
+  
 }

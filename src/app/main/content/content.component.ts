@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { BugService } from '../bug.service';
 
 export interface Bugform {
+  id?:string,
   title:string,
   description:string,
   priority:string,
@@ -18,13 +18,13 @@ export interface Bugform {
 })
 export class ContentComponent implements OnInit {
 
-  constructor(private service:BugService, private router:Router) { }
+  constructor(private service:BugService, private router:Router) {
+  }
 
-  bugs:any[]
+  bugs:Array<Bugform>
   params:string[] = ["title","priority", "reporter", "createdAt", "status"]
   sorting:string[] = ["desc"]
   sortChecker:boolean = true;
-  bugIF:Bugform
 
   ngOnInit(): void {
     this.service.getBugs().subscribe(data => {
@@ -47,4 +47,9 @@ export class ContentComponent implements OnInit {
       }
     })
   }
+
+  onClick(id:string) {
+    this.router.navigate(['/putBugs', id])
+  }
 }
+

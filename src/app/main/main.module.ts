@@ -5,17 +5,18 @@ import { ContentComponent } from './content/content.component';
 import { RouterModule } from '@angular/router';
 import { BugformComponent } from './bugform/bugform.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PutBugsComponent } from './put-bugs/put-bugs.component';
+import { EditBugsComponent } from './edit-bugs/edit-bugs.component';
+
 
 
 
 @NgModule({
-  declarations: [NavComponent, ContentComponent, BugformComponent, PutBugsComponent],
+  declarations: [NavComponent, ContentComponent, BugformComponent, EditBugsComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot([]),
     ReactiveFormsModule
   ],
-  exports:[NavComponent, ContentComponent, BugformComponent, PutBugsComponent]
+  exports:[NavComponent, ContentComponent, BugformComponent, EditBugsComponent]
 })
 export class MainModule { }

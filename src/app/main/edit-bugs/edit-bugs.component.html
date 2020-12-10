@@ -58,8 +58,6 @@
         <div *ngIf="putForm.get('status').invalid && putForm.get('status').dirty"class="text-danger">
             This Field is required!
         </div>
+        <button class='btn btn-primary' [disabled]="!putForm.valid" (click)="onSubmit()">Submit</button>
     </div>
-
-    <button class='btn btn-primary' [disabled]="!putForm.valid">Submit</button>
 </form>
-<router-outlet></router-outlet>

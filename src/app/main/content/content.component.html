@@ -30,7 +30,7 @@
           <td>{{ bug.createdAt }}</td>
           <td>{{ bug.status }}</td>
           <td>
-            <button class="btn btn-primary" [routerLink]="['/putBugs']">Edit</button>
+            <button class="btn btn-primary" (click)="onClick(bug.id)">Edit</button>
           </td>
         </tr>
       </tbody>

@@ -8,10 +8,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainModule } from './main/main.module';
 import { NavComponent } from './main/nav/nav.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgBugsComponent } from './ng-bugs/ng-bugs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NgBugsComponent,
   ],
   imports: [
     BrowserModule,
