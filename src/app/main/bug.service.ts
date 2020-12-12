@@ -1,14 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-
-export interface Bugform {
-  title:string,
-  description:string,
-  priority:string,
-  reporter:string,
-  status:string
-}
+import { Bugform } from './bug-form';
 
 @Injectable({
   providedIn: 'root'

@@ -9,7 +9,7 @@ import { EditBugsComponent } from './main/edit-bugs/edit-bugs.component';
 const routes: Routes = [
   {path:"bugform", component:BugformComponent},
   {path:"content", component:ContentComponent},
-  {path:"editBugs/:id", component:EditBugsComponent}
+  {path:"edit-bugs/:id", component:EditBugsComponent}
 ];
 
 @NgModule({

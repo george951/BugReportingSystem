@@ -1,15 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Bugform } from '../bug-form';
 import { BugService } from '../bug.service';
-
-export interface Bugform {
-  id?:string,
-  title:string,
-  description:string,
-  priority:string,
-  reporter:string,
-  status:string
-}
 
 @Component({
   selector: 'app-content',
@@ -49,7 +41,7 @@ export class ContentComponent implements OnInit {
   }
 
   onClick(id:string) {
-    this.router.navigate(['/putBugs', id])
+    this.router.navigate(['/edit-bugs', id])
   }
 }
 

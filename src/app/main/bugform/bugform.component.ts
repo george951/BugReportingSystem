@@ -4,16 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { title } from 'process';
 import { Observable, of } from 'rxjs';
-
-
-export interface Bugform {
-  title:string,
-  description:string,
-  priority:string,
-  reporter:string,
-  status:string
-}
-
 @Component({
   selector: 'app-bugform',
   templateUrl: './bugform.component.html',

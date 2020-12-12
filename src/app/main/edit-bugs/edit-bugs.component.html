@@ -58,6 +58,24 @@
         <div *ngIf="putForm.get('status').invalid && putForm.get('status').dirty"class="text-danger">
             This Field is required!
         </div>
-        <button class='btn btn-primary' [disabled]="!putForm.valid" (click)="onSubmit()">Submit</button>
     </div>
+
+
+    <!-- Comments -->
+        <div style="padding:3%" class=form-array>
+            <label>Comments</label>
+            <div class="border">
+                <div style="padding:5%" class="form-group" >
+                    <label>Description</label>
+                    <input type="text" class="form-control"  formControlName="_description">
+                </div>
+                <div  style="padding:5%" class="form-group" >
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="_reporter">
+                </div>
+            </div>
+        </div>
+
+    <!-- Button -->
+    <button class='btn btn-primary' [disabled]="!putForm.valid" (click)="onSubmit()">Submit</button>
 </form>
