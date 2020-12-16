@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Bugform } from '../bug-form';
 import { BugService } from '../bug.service';
 
@@ -17,11 +18,13 @@ export class EditBugsComponent implements OnInit {
   
   bugId:string
   bugs:Bugform
+  
   putForm:FormGroup
   putBody:Bugform
+  comments:FormArray
+  
 
   ngOnInit(): void {
-    this.service.getBugs().subscribe(data=>{this.bugs = data;})
     this.putForm = this.fb.group({
       title: [null, Validators.required],
       description: [null, Validators.required],
@@ -29,8 +32,7 @@ export class EditBugsComponent implements OnInit {
       reporter: [null, Validators.required],
       status: [null, Validators.required],
       id:[null],
-      _description:[null, Validators.required],
-      _reporter:[null, Validators.required]
+      comments: this.fb.array([this.addCommentGroup()])
     })
 
     this.putForm.get('reporter').valueChanges.subscribe(value => {
@@ -45,38 +47,51 @@ export class EditBugsComponent implements OnInit {
     })
   }
 
-  get title() {
+  get _title() {
     return this.putForm.get('title')
-  }
-  get description() {
-    return this.putForm.get('description')
-  }
-  get priority() {
-    return this.putForm.get('priority')
-  }
-  get reporter() {
-    return this.putForm.get('reporter')
-  }
-  get status() {
-    return this.putForm.get('status')
   }
   get _description() {
     return this.putForm.get('description')
   }
-  get _reporter() {
-    return this.putForm.get('_reporter')
+  get _priority() {
+    return this.putForm.get('priority')
   }
-
+  get _reporter() {
+    return this.putForm.get('reporter')
+  }
+  get _status() {
+    return this.putForm.get('status')
+  }
+  get _comments() {
+    return <FormArray>this.putForm.get('comments')
+  }
 
   onSubmit():void {
     this.bugId = this.route.snapshot.paramMap.get("id")
     this.router.navigate(['/content'])
     this.service.putBugs(this.bugId, {
-      title:this.title.value,
-      description:this.description.value,
-      priority:this.priority.value,
-      reporter:this.reporter.value,
-      status:this.status.value
+      title:this._title.value,
+      description:this._description.value,
+      priority:this._priority.value,
+      reporter:this._reporter.value,
+      status:this._status.value,
+      comments:this._comments.value
     }).subscribe(data=>{})
+  }
+
+  addCommentGroup() {
+    return this.fb.group({
+      reporter:[],
+      description:[]
+    })
+  }
+
+  addComments() {
+    return this._comments.push(this.addCommentGroup())
+  }
+
+  getData():Observable<any> {
+    this.bugId = this.route.snapshot.paramMap.get("id")
+    return this.service.getBugById(this.bugId)
   }
 }

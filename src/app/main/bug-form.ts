@@ -4,4 +4,5 @@ export interface Bugform {
     priority:string,
     reporter:string,
     status:string,
+    comments:string
   }

@@ -56,7 +56,7 @@ export class BugformComponent implements OnInit {
 
   onSubmit() {
     this.router.navigate(['/content'])
-    return this.http.post("https://bug-report-system-server.herokuapp.com/bugs",{
+    return this.http.post(this.bugUrl,{
       title: this.title.value,
       description: this.description.value,
       priority: this.priority.value,
