@@ -1,0 +1,81 @@
+<form [formGroup]="putForm" class="putForm-1">
+
+    <!-- Title -->
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Enter the title for the bug" formControlName="title">
+        <div *ngIf="putForm.get('title').errors?.required && putForm.get('title').dirty" class="text-danger">
+            This Field is required!
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-froup">
+        <label>Description</label>
+        <input type="text" class=form-control placeholder="Enter the description for the bug" formControlName="description" id="putDesc-1">
+        <div *ngIf="putForm.get('description').errors?.required && putForm.get('description').dirty" class="text-danger">
+            This Field is required!
+        </div>
+    </div>
+
+    <!-- Priority -->
+    <div class="form-group">
+        <label>Priority</label>
+        <select class="form-control" formControlName="priority">
+            <option [ngValue]="null">Select</option>
+            <option value="1">Minor</option>
+            <option value="2">Major</option>
+            <option value="3">Critical</option>
+        </select>
+        <div *ngIf="putForm.get('priority').errors?.required" class="text-danger">
+            This Field is required!
+        </div>
+    </div>
+
+    <!-- Reporter -->
+    <div class="form-group">
+        <label>Reporter</label>
+        <select class="form-control" formControlName="reporter">
+            <option [ngValue]="null">Select</option>
+            <option>QA</option>
+            <option>PO</option>
+            <option>DEV</option>
+        </select>
+        <div *ngIf="putForm.get('reporter').errors?.required" class="text-danger">
+            This Field is required!
+        </div>
+    </div>
+
+    <!-- Status -->
+    <div class="form-group">
+        <label>Status</label>
+        <select class="form-control" formControlName="status">
+            <option [ngValue]="null">Select</option>
+            <option>Ready for testing!</option>
+            <option>Done</option>
+            <option>Rejected</option>
+        </select>
+        <div *ngIf="putForm.get('status').invalid && putForm.get('status').dirty"class="text-danger">
+            This Field is required!
+        </div>
+    </div>
+
+
+    <!-- Comments -->
+        <div style="padding:3%" class=form-array>
+            <label>Comments</label>
+            <div class="border">
+                <div style="padding:5%" class="form-group" >
+                    <label>Description</label>
+                    <input type="text" class="form-control"  formControlName="_description">
+                </div>
+                <div  style="padding:5%" class="form-group" >
+                    <label>Name</label>
+                    <input type="text" class="form-control" formControlName="_reporter">
+                </div>
+            </div>
+        </div>
+
+    <!-- Button -->
+    <button class='btn btn-primary' [disabled]="!putForm.valid" (click)="onSubmit()">Submit</button>
+</form>
