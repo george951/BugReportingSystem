@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 import { BugformComponent } from './bugform/bugform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditBugsComponent } from './edit-bugs/edit-bugs.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -15,7 +16,9 @@ import { EditBugsComponent } from './edit-bugs/edit-bugs.component';
   imports: [
     CommonModule,
     RouterModule.forRoot([]),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    HttpClientModule
   ],
   exports:[NavComponent, ContentComponent, BugformComponent, EditBugsComponent]
 })

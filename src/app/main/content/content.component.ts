@@ -1,4 +1,5 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bugform } from '../bug-form';
 import { BugService } from '../bug.service';
@@ -18,9 +19,21 @@ export class ContentComponent implements OnInit {
   sorting:string[] = ["desc"]
   sortChecker:boolean = true;
 
+  totalRecords:number
+  totalPages:number
+  page:number=0
+  perPage:number
+  
+
   ngOnInit(): void {
-    this.service.getBugs().subscribe(data => {
-      this.bugs = data
+
+    this.service.getHeadBugs().subscribe(head => {
+      this.totalPages = head.headers.get('totalPages');
+      this.totalRecords = head.headers.get('totalRecords');
+      this.perPage = head.headers.get('perPage')
+      this.service.getSizeBugs(this.perPage,this.page).subscribe(data => {
+        this.bugs = data
+      })
     })
   }
 
@@ -40,8 +53,30 @@ export class ContentComponent implements OnInit {
     })
   }
 
-  onClick(id:string) {
+  onEdit(id:string) {
     this.router.navigate(['/edit-bugs', id])
+  }
+
+  onDelete(id:string) {
+    this.service.deleteBugs(id).subscribe(data => {})
+  }
+
+  Prev() {
+    if (this.page > 0) {
+      this.page -= 1
+      this.service.getSizeBugs(this.perPage,this.page).subscribe(data => {
+        this.bugs = data
+      })
+    }
+  }
+
+  Next() {
+    if (this.page != (this.totalPages - 1)) {
+      this.page +=1
+      this.service.getSizeBugs(this.perPage,this.page).subscribe(data => {
+        this.bugs = data
+      })
+    }
   }
 }
 
