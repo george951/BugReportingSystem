@@ -18,10 +18,6 @@ export class BugService implements OnInit{
     return this.http.get(this.bugUrl)
   }
 
-  getSortingBugs(params:string, sorting:string):Observable<any>{
-    return this.http.get(`${this.bugUrl}?sort=${params},${sorting}`)
-  }
-
   putBugs(id:string,body:Bugform):Observable<any> {
     return this.http.put(`${this.bugUrl}/${id}`,body)
   }
@@ -32,14 +28,6 @@ export class BugService implements OnInit{
 
   deleteBugs(id:string):Observable<any> {
     return this.http.delete(`${this.bugUrl}/${id}`)
-  }
-
-  getSizeBugs(number:number, page:number):Observable<any> {
-    return this.http.get(`${this.bugUrl}?page=${page}&size=${number}`)
-  }
-
-  getHeadBugs():Observable<any> {
-    return this.http.get(this.bugUrl, {observe:"response"})
   }
 
   getPSBugs(param:string,sort:string,page:number,title:string,priority:string,reporter:string,createdAt:string,status:string):Observable<any> {
