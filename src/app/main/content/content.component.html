@@ -1,52 +1,91 @@
-<div>
-  <button type="button" class="btn btn-primary" [routerLink]="['/bugform']">
-    Create New
-  </button>
+<form [formGroup]="searchForm">
   <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" (click)="sortedBugs(params[0], sorting[0])">Title</th>
-          <th scope="col" (click)="sortedBugs(params[1], sorting[0])">
-            Priority
-          </th>
-          <th scope="col" (click)="sortedBugs(params[2], sorting[0])">
-            Reporter
-          </th>
-          <th scope="col" (click)="sortedBugs(params[3], sorting[0])">
-            Date Created
-          </th>
-          <th scope="col" (click)="sortedBugs(params[4], sorting[0])">
-            Status
-          </th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let bug of bugs | paginate: {
-          id:'table-pagination',
-          itemsPerPage: perPage,
-          currentPage: page ,
-          totalItems: totalRecords
-        } ">
-          <td>{{ bug.title }}</td>
-          <td>{{ bug.priority }}</td>
-          <td>{{ bug.reporter }}</td>
-          <td>{{ bug.createdAt }}</td>
-          <td>{{ bug.status }}</td>
+    <button type="button" class="btn btn-primary" [routerLink]="['/bugform']">
+      Create New
+    </button>
+    <div>
+      <table class="table">
+        <thead>
+           <!-- Title -->
           <td>
-            <button class="btn btn-primary" (click)="onEdit(bug.id)">Edit</button>
+            <div class="form-group">
+              <input class="form-control" type="text" placeholder="Search for title" formControlName="title">
+            </div>
           </td>
+          <!-- Priority -->
           <td>
-            <button class="btn btn-primary" (click)="onDelete(bug.id)">Delete</button>
+            <div class="form-group">
+              <select class="form-control" formControlName="priority">
+                <option [ngValue]="null">Select</option>
+                <option>Minor</option>
+                <option>Major</option>
+                <option>Critical</option>
+              </select>
+            </div>
           </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="btn">
-      <button class="btn btn-primary" (click)="Prev()"><<</button>
-      <button class="btn btn-primary" (click)="Next()">>></button>
+          <!-- Reporter -->
+          <td>
+            <div class="form-group">
+              <select class="form-control" formControlName="reporter">
+                <option [ngValue]="null">Select</option>
+                <option>QA</option>
+                <option>PO</option>
+                <option>DEV</option>
+              </select>
+            </div>
+          </td>
+          <!-- Date -->
+          <td>
+            <div class="form-group">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search for date" formControlName="createdAt">
+              </div>
+            </div>
+          </td>
+          <!-- Status -->
+          <td>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search for status" formControlName="status">
+            </div>
+          </td>
+          <!-- Search Button -->
+          <td>
+            <button class="btn btn-primary" (click)="onSearch()" style="width:55%">Search</button>
+          </td>
+          <tr>
+            <th scope="col" (click)="sortedBugs(params[0], sorting[0])">Title</th>
+            <th scope="col" (click)="sortedBugs(params[1], sorting[0])">Priority</th>
+            <th scope="col" (click)="sortedBugs(params[2], sorting[0])">Reporter</th>
+            <th scope="col" (click)="sortedBugs(params[3], sorting[0])">Date Created</th>
+            <th scope="col" (click)="sortedBugs(params[4], sorting[0])">Status</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bug of bugs | paginate: {
+            id:'table-pagination',
+            itemsPerPage: perPage,
+            currentPage: page ,
+            totalItems: totalRecords
+          } ">
+            <td>{{ bug.title }}</td>
+            <td>{{ bug.priority }}</td>
+            <td>{{ bug.reporter }}</td>
+            <td>{{ bug.createdAt }}</td>
+            <td>{{ bug.status }}</td>
+            <td>
+              <div class="btn btn-group" role="group">
+                <button class="btn btn-primary" (click)="onEdit(bug.id)">Edit</button>
+                <button class="btn btn-primary" (click)="onDelete(bug.id)">Delete</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn">
+        <button class="btn btn-primary" (click)="Prev()"><<</button>
+        <button class="btn btn-primary" (click)="Next()">>></button>
+      </div>
     </div>
   </div>
-</div>
+</form>
