@@ -24,20 +24,22 @@ export class ContentComponent implements OnInit {
   totalPages:number
   page:number = 0
   perPage:number
-
+  
   searchForm:FormGroup
   
 
   ngOnInit(): void {
 
-    this.service.getHeadBugs().subscribe(head => {
-      this.totalPages = head.headers.get('totalPages');
-      this.totalRecords = head.headers.get('totalRecords');
-      this.perPage = head.headers.get('perPage')
-      this.service.getSizeBugs(this.perPage,this.page).subscribe(data => {
-        this.bugs = data
-      })
-    })
+    // this.service.getHeadBugs().subscribe(head => {
+    //   this.totalPages = head.headers.get('totalPages');
+    //   this.totalRecords = head.headers.get('totalRecords');
+    //   this.perPage = head.headers.get('perPage')
+
+    //   this.service.getSizeBugs(this.perPage,this.page).subscribe(data => {
+    //     this.bugs = data
+    //   })
+    // })
+    this.service.getBugs().subscribe(data => this.bugs = data)
 
     this.searchForm = this.fb.group({
       title:'',
@@ -88,7 +90,7 @@ export class ContentComponent implements OnInit {
     if (this.page != (this.totalPages - 1)) {
       this.page +=1
       var params = "title"
-      var sort = "asc"
+      var sort = "desc"
       this.service.getPSBugs(params,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
         this.bugs = data
       })
@@ -117,9 +119,6 @@ export class ContentComponent implements OnInit {
       this.totalRecords = head.headers.get("totalRecords")
       this.perPage = head.headers.get("perPage")
 
-      head.headers.set("totalPages", this.totalPages)
-      head.headers.set("totalRecords", this.totalRecords)
-      head.headers.set("perPage", this.perPage)
 
       var params = "title"
       var sort = "asc"

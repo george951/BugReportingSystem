@@ -17,9 +17,9 @@
             <div class="form-group">
               <select class="form-control" formControlName="priority">
                 <option [ngValue]="null">Select</option>
-                <option>Minor</option>
-                <option>Major</option>
-                <option>Critical</option>
+                <option value="1">Minor</option>
+                <option value="2">Major</option>
+                <option value="3">Critical</option>
               </select>
             </div>
           </td>
@@ -76,7 +76,7 @@
             <td>
               <div class="btn btn-group" role="group">
                 <button class="btn btn-primary" (click)="onEdit(bug.id)">Edit</button>
-                <button class="btn btn-primary" (click)="onDelete(bug.id)">Delete</button>
+                <button class="btn btn-danger" (click)="onDelete(bug.id)">Delete</button>
               </div>
             </td>
           </tr>
