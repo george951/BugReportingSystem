@@ -42,4 +42,12 @@ export class BugService implements OnInit{
     return this.http.get(this.bugUrl, {observe:"response"})
   }
 
+  getPSBugs(param:string,sort:string,page:number,title:string,priority:string,reporter:string,createdAt:string,status:string):Observable<any> {
+    return this.http.get(`${this.bugUrl}?sort=${param},${sort}&page=${page}&title=${title}&priority=${priority}&reporter=${reporter}&createdAt=${createdAt}&status=${status}`)
+  }
+
+  getHeadPSBugs(page:number,title:string,priority:string,reporter:string,createdAt:string,status:string):Observable<any> {
+    return this.http.get(`${this.bugUrl}?title=${title}&priority=${priority}&reporter=${reporter}&status=${status}&createdAt=${createdAt}`, {observe:"response"})
+  }
+
 }
