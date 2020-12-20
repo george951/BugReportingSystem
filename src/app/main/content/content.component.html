@@ -16,7 +16,6 @@
           <td>
             <div class="form-group">
               <select class="form-control" formControlName="priority">
-                <option [ngValue]="null">Select</option>
                 <option value="1">Minor</option>
                 <option value="2">Major</option>
                 <option value="3">Critical</option>
@@ -27,7 +26,6 @@
           <td>
             <div class="form-group">
               <select class="form-control" formControlName="reporter">
-                <option [ngValue]="null">Select</option>
                 <option>QA</option>
                 <option>PO</option>
                 <option>DEV</option>
@@ -53,11 +51,11 @@
             <button class="btn btn-primary" (click)="onSearch()" style="width:55%">Search</button>
           </td>
           <tr>
-            <th scope="col" (click)="sortedBugs(params[0], sorting[0])">Title</th>
-            <th scope="col" (click)="sortedBugs(params[1], sorting[0])">Priority</th>
-            <th scope="col" (click)="sortedBugs(params[2], sorting[0])">Reporter</th>
-            <th scope="col" (click)="sortedBugs(params[3], sorting[0])">Date Created</th>
-            <th scope="col" (click)="sortedBugs(params[4], sorting[0])">Status</th>
+            <th scope="col" (click)="sortedBugs(params[0],sorting[0],component)">Title</th>
+            <th scope="col" (click)="sortedBugs(params[1],sorting[0],component)">Priority</th>
+            <th scope="col" (click)="sortedBugs(params[2],sorting[0],component)">Reporter</th>
+            <th scope="col" (click)="sortedBugs(params[3],sorting[0],component)">Date Created</th>
+            <th scope="col" (click)="sortedBugs(params[4],sorting[0],component)">Status</th>
             <th scope="col"></th>
           </tr>
         </thead>

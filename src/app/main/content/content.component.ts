@@ -18,6 +18,7 @@ export class ContentComponent implements OnInit {
   bugs:Array<Bugform>
   params:string[] = ["title","priority", "reporter", "createdAt", "status"]
   sorting:string[] = ["desc"]
+  component:string = ","
   sortChecker:boolean = true;
 
   totalRecords:number
@@ -30,17 +31,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.service.getHeadBugs().subscribe(head => {
-    //   this.totalPages = head.headers.get('totalPages');
-    //   this.totalRecords = head.headers.get('totalRecords');
-    //   this.perPage = head.headers.get('perPage')
-
-    //   this.service.getSizeBugs(this.perPage,this.page).subscribe(data => {
-    //     this.bugs = data
-    //   })
-    // })
     this.service.getBugs().subscribe(data => this.bugs = data)
-
     this.searchForm = this.fb.group({
       title:'',
       priority:'',
@@ -48,11 +39,10 @@ export class ContentComponent implements OnInit {
       createdAt:'',
       status:''
     })
-
   }
 
-  sortedBugs(params:string, sorting:string) {
-    this.service.getPSBugs(params,sorting,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
+  sortedBugs(params:string, sorting:string,component:string) {
+    this.service.getPSBugs(params,component,sorting,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
       this.bugs = data
 
       if (this.sortChecker) {
@@ -78,10 +68,16 @@ export class ContentComponent implements OnInit {
   Prev() {
     if (this.page > 0) {
       this.page -= 1
-      var params = "title"
-      var sort = "asc"
-      this.service.getPSBugs(params,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
-        this.bugs = data
+      this.service.getHeadPSBugs(this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(head => {
+        this.totalPages = head.headers.get("totalPages")
+        this.totalRecords = head.headers.get("totalRecords")
+        this.perPage = head.headers.get("perPage")
+        var params = ""
+        var sort = ""
+        var component = ""
+        this.service.getPSBugs(params,component,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
+          this.bugs = data
+        })
       })
     }
   }
@@ -89,10 +85,16 @@ export class ContentComponent implements OnInit {
   Next() {
     if (this.page != (this.totalPages - 1)) {
       this.page +=1
-      var params = "title"
-      var sort = "desc"
-      this.service.getPSBugs(params,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
-        this.bugs = data
+      var params = ""
+      var sort = ""
+      var component = ""
+      this.service.getHeadPSBugs(this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(head => {
+        this.totalPages = head.headers.get("totalPages")
+        this.totalRecords = head.headers.get("totalRecords")
+        this.perPage = head.headers.get("perPage")
+        this.service.getPSBugs(params,component,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
+          this.bugs = data
+        })
       })
     }
   }
@@ -118,11 +120,10 @@ export class ContentComponent implements OnInit {
       this.totalPages = head.headers.get("totalPages")
       this.totalRecords = head.headers.get("totalRecords")
       this.perPage = head.headers.get("perPage")
-
-
-      var params = "title"
-      var sort = "asc"
-      this.service.getPSBugs(params,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
+      var params = ""
+      var sort = ""
+      var component = ""
+      this.service.getPSBugs(params,component,sort,this.page,this._title.value,this._priority.value,this._reporter.value,this._createdAt.value,this._status.value).subscribe(data => {
         this.bugs = data
       })
     })

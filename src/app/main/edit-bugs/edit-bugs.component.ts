@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { title } from 'process';
 import { Observable } from 'rxjs';
 import { Bugform } from '../bug-form';
 import { BugService } from '../bug.service';
-
 
 @Component({
   selector: 'app-edit-bugs',
@@ -22,6 +22,8 @@ export class EditBugsComponent implements OnInit {
   putForm:FormGroup
   putBody:Bugform
   comments:FormArray
+
+  objectBugs:any
   
 
   ngOnInit(): void {
@@ -31,8 +33,23 @@ export class EditBugsComponent implements OnInit {
       priority: [null, Validators.required],
       reporter: [null, Validators.required],
       status: [null, Validators.required],
-      id:[null],
-      comments: this.fb.array([this.addCommentGroup()])
+      comments: this.fb.array([this.addCommentGroup()]),
+      id:[null]
+    })
+
+    this.bugId = this.route.snapshot.paramMap.get("id")
+    console.log(this.bugId)
+    this.service.getBugById(this.bugId).subscribe(data => {
+      this.objectBugs = data
+      this.putForm.setValue({
+        title:this.objectBugs.title,
+        description:this.objectBugs.description,
+        priority:this.objectBugs.priority,
+        reporter:this.objectBugs.reporter,
+        status:this.objectBugs.status,
+        comments:this.objectBugs.comments,
+        id:""
+      })
     })
 
     this.putForm.get('reporter').valueChanges.subscribe(value => {
@@ -66,6 +83,11 @@ export class EditBugsComponent implements OnInit {
     return <FormArray>this.putForm.get('comments')
   }
 
+  get _id() {
+    return this.putForm.get("id")
+  }
+
+
   onSubmit():void {
     this.bugId = this.route.snapshot.paramMap.get("id")
     this.router.navigate(['/content'])
@@ -88,10 +110,5 @@ export class EditBugsComponent implements OnInit {
 
   addComments() {
     return this._comments.push(this.addCommentGroup())
-  }
-
-  getData():Observable<any> {
-    this.bugId = this.route.snapshot.paramMap.get("id")
-    return this.service.getBugById(this.bugId)
   }
 }
