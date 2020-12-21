@@ -1,3 +1,4 @@
+<div style="background-color:#95999c; width:100%;height:max-content">
 <form [formGroup]="putForm" class="putForm-1">
   <!-- Title -->
   <div class="form-group">
@@ -44,9 +45,9 @@
     <label>Priority</label>
     <select class="form-control" formControlName="priority">
       <option [ngValue]="null">Select</option>
-      <option value="1">Minor</option>
-      <option value="2">Major</option>
-      <option value="3">Critical</option>
+      <option value="1" style="color:green">Minor = 1</option>
+      <option value="2" style="color:orange">Major = 2</option>
+      <option value="3" style="color:red">Critical = 3</option>
     </select>
     <div *ngIf="putForm.get('priority').errors?.required" class="text-danger">
       This Field is required!
@@ -99,6 +100,5 @@
 
   <!-- Button -->
   <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!putForm.valid">Submit</button>
-
-
 </form>
+</div>

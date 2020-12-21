@@ -1,10 +1,10 @@
 <form [formGroup]="searchForm">
-  <div>
-    <button type="button" class="btn btn-primary" [routerLink]="['/bugform']">
-      Create New
+  <div style="background-color:#95999c">
+    <button type="button" class="btn btn-primary" id="btn-primary" [routerLink]="['/bugform']">
+      +
     </button>
     <div>
-      <table class="table">
+      <table class="table table-dark ">
         <thead>
            <!-- Title -->
           <td>
@@ -16,9 +16,10 @@
           <td>
             <div class="form-group">
               <select class="form-control" formControlName="priority">
-                <option value="1">Minor</option>
-                <option value="2">Major</option>
-                <option value="3">Critical</option>
+                <option [ngValue]="''">Select</option>
+                <option value="1" style="color:green">Minor = 1</option>
+                <option value="2" style="color:orange">Major = 2</option>
+                <option value="3" style="color:red">Critical = 3</option>
               </select>
             </div>
           </td>
@@ -26,6 +27,7 @@
           <td>
             <div class="form-group">
               <select class="form-control" formControlName="reporter">
+                <option [ngValue]="''">Select</option>
                 <option>QA</option>
                 <option>PO</option>
                 <option>DEV</option>
@@ -79,11 +81,9 @@
             </td>
           </tr>
         </tbody>
-      </table>
-      <div class="btn">
-        <button class="btn btn-primary" (click)="Prev()"><<</button>
-        <button class="btn btn-primary" (click)="Next()">>></button>
-      </div>
+      </table> 
+        <button class="btn btn-primary" (click)="Prev()" style="margin-left:36%; width:5%;" > << </button>
+        <button class="btn btn-primary" (click)="Next()" style="margin-left:11%; width:5%" > >> </button>
     </div>
   </div>
 </form>
